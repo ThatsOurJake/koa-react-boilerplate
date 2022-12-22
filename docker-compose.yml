@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  server:
+    build:
+      dockerfile: 'Dockerfile'
+      context: .
+    volumes:
+      - /app/node_modules
+      - $PWD/src/server:/app/src
+    command: yarn dev:server
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+  client:
+    build:
+      dockerfile: 'Dockerfile'
+      context: .
+    volumes:
+      - /app/node_modules
+      - $PWD/src/client:/app/src
+    command: yarn dev:client
+    ports:
+      - 3001:3001
+
