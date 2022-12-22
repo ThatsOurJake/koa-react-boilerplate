@@ -23,6 +23,12 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(mount('/assets', serve(path.resolve('assets'))));
 }
 
+router.get('/api/ping', ctx => {
+  ctx.body = {
+    data: 'pong',
+  };
+});
+
 router.get('/', async ctx => {
   await ctx.render('index');
 });
