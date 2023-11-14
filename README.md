@@ -7,3 +7,4 @@ docker-compose up
 ```
 
 Copy the `.env.example` -> `.env`
+# llyods-hackday

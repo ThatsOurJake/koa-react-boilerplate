@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: process.env.NODE_ENV === 'production' ?  './src/client/index.tsx' : './src/index.tsx',
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   module: {
     rules: [
@@ -10,6 +10,11 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/i,
+        include: path.resolve(__dirname, 'src'),
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   resolve: {
@@ -17,7 +22,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: process.env.NODE_ENV === 'production' ? path.resolve(__dirname, 'src', 'client', 'dist') : path.resolve(__dirname, 'dist'),
     publicPath: '/assets/'
   },
   devServer: {
